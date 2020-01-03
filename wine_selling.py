@@ -2,6 +2,11 @@
 
 # https://www.youtube.com/watch?v=pwpOC1dph6U
 
+# Scheme of selling wine is just some path in binary 
+# tree. Tree has height number_of_wines - 1. We choose
+# only n - 1 wines because if we have to sell last wine
+# we do not really has choice to go left or right.
+
 
 # Create all possible ways of selling wines. 
 #   0 means sell leftmost wine
