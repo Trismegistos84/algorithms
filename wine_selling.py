@@ -41,12 +41,12 @@ def find_max_price_rec(prices):
 
 def assert_price(f, prices, expected):
     max_price = f(prices)
-    msg = f"{prices}: expected {expected}, {max_price == expected}"
+    msg = "{}: expected {}, {}".format(prices, expected, max_price == expected)
     print(msg)
 
 
 def test_suite(f):
-    print(f'testing function: {f.__name__}')
+    print('testing function: {}'.format(f.__name__))
     assert_price(f, [1], 1)
     assert_price(f, [3], 3)
     assert_price(f, [1, 2], 5)
