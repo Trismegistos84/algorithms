@@ -61,16 +61,16 @@ def test_suite(f):
     assert_price(find_max_price_rec, prices, expected_price)
 
 
-test_suite(find_max_price_rec)
+#test_suite(find_max_price_rec)
 
 
-# it takes 11 seconds
-#prices = list(range(1, 25))
+# it takes 5 seconds on rpi3
+#prices = list(range(1, 19))
 #expected_price = numpy.dot(prices, prices)
 #assert_price(find_max_price_rec, prices, expected_price)
 
-# it takes 45 seconds
-#prices = list(range(1, 27))
+# it takes 18.7  seconds on rpi3
+#prices = list(range(1, 21))
 #expected_price = numpy.dot(prices, prices)
 #assert_price(find_max_price_rec, prices, expected_price)
 
