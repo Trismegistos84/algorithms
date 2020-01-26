@@ -41,7 +41,7 @@ def find_max_price_rec(prices):
 
 def assert_price(f, prices, expected):
     max_price = f(prices)
-    msg = f"{prices}: expected {expected}, {max_price == expected}".format()
+    msg = f"{prices}: expected {expected}, {max_price == expected}"
     print(msg)
 
 
