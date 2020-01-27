@@ -39,6 +39,36 @@ def find_max_price_rec(prices):
     return max(price_left, price_right)
 
 
+def find_max_price_memo_init(prices):
+    memo = [[None] * len(prices) for i in range(len(prices))]
+    return find_max_price_memo(prices, 0, len(prices) - 1, memo)
+
+
+# Find maximum price use memoization
+# start -- start in prices array inclusive
+# end -- end in prices array inclusive
+# memo -- memoization array
+def find_max_price_memo(prices, start, end, memo):
+    if memo[start][end] is not None:
+        return memo[start][end]
+
+    if start == end:
+        memo[start][end] = prices[start]
+        return prices[start]
+
+    # left
+    rest = prices[start+1:end+1]
+    price_left = prices[start] + find_max_price_memo(prices, start + 1, end, memo) + sum(rest)
+
+    # right
+    rest = prices[start:end]
+    price_right = prices[end] + find_max_price_memo(prices, start, end - 1, memo) + sum(rest)
+
+    result = max(price_left, price_right)
+    memo[start][end] = result
+    return result
+
+
 # Find maximum price using dynamic programming
 # This one was created by modyfing find_max_price_rec to
 # use memoization in 2D array.
@@ -53,24 +83,29 @@ def assert_price(f, prices, expected):
     print(msg)
 
 
+def cross_validate(f1, f2, prices):
+    is_same = (f1(prices) == f2(prices))
+    print("{} == {} for {} is {}".format(f1.__name__, f2.__name__, prices, is_same))
+
+
 def test_suite(f):
     print('testing function: {}'.format(f.__name__))
-    assert_price(f, [1], 1)
-    assert_price(f, [3], 3)
-    assert_price(f, [1, 2], 5)
-    assert_price(f, [2, 1], 5)
-    assert_price(f, [100, 1], 201)
-
-    assert_price(f, [1, 2, 3], 14)
-    assert_price(f, [3, 2, 1], 14)
-
-    prices = list(range(1, 10))
-    expected_price = numpy.dot(prices, prices)
-    assert_price(find_max_price_rec, prices, expected_price)
+    for test_case in test_cases:
+        assert_price(f, test_case[0], test_case[1])        
 
 
-#test_suite(find_max_price_rec)
+def cross_validation_suite(f1, f2):
+    for test_case in test_cases:
+        cross_validate(f1, f2, test_case[0])
+    
 
+test_cases = [([1], 1), ([3], 3), ([1, 2], 5), ([2, 1], 5), ([100, 1], 201), ([1, 2, 3], 14), ([3, 2, 1], 14)]
+prices = list(range(1, 10))
+expected_price = numpy.dot(prices, prices)
+test_cases.append((prices, expected_price))
+
+test_suite(find_max_price_rec)
+cross_validation_suite(find_max_price_rec, find_max_price_memo_init)
 
 # it takes 5 seconds on rpi3
 #prices = list(range(1, 19))
