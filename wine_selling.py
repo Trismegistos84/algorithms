@@ -99,13 +99,13 @@ def cross_validation_suite(f1, f2):
         cross_validate(f1, f2, test_case[0])
     
 
-test_cases = [([1], 1), ([3], 3), ([1, 2], 5), ([2, 1], 5), ([100, 1], 201), ([1, 2, 3], 14), ([3, 2, 1], 14)]
-prices = list(range(1, 10))
-expected_price = numpy.dot(prices, prices)
-test_cases.append((prices, expected_price))
+#test_cases = [([1], 1), ([3], 3), ([1, 2], 5), ([2, 1], 5), ([100, 1], 201), ([1, 2, 3], 14), ([3, 2, 1], 14)]
+#prices = list(range(1, 10))
+#expected_price = numpy.dot(prices, prices)
+#test_cases.append((prices, expected_price))
 
-test_suite(find_max_price_rec)
-cross_validation_suite(find_max_price_rec, find_max_price_memo_init)
+#test_suite(find_max_price_rec)
+#cross_validation_suite(find_max_price_rec, find_max_price_memo_init)
 
 # it takes 5 seconds on rpi3
 #prices = list(range(1, 19))
@@ -116,6 +116,11 @@ cross_validation_suite(find_max_price_rec, find_max_price_memo_init)
 #prices = list(range(1, 21))
 #expected_price = numpy.dot(prices, prices)
 #assert_price(find_max_price_rec, prices, expected_price)
+
+# it takes 1.7  seconds on rpi3
+#prices = list(range(1, 21))
+#expected_price = numpy.dot(prices, prices)
+#assert_price(find_max_price_memo_init, prices, expected_price)
 
 
 
