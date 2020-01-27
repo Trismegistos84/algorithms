@@ -39,6 +39,14 @@ def find_max_price_rec(prices):
     return max(price_left, price_right)
 
 
+# Find maximum price using dynamic programming
+# This one was created by modyfing find_max_price_rec to
+# use memoization in 2D array.
+def find_max_price_dp(price_list):
+    prices = [[0] * len(price_list) for i in range(len(price_list))]
+    # implement me
+
+
 def assert_price(f, prices, expected):
     max_price = f(prices)
     msg = "{}: expected {}, {}".format(prices, expected, max_price == expected)
